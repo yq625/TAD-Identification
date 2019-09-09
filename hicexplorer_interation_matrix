@@ -1,0 +1,15 @@
+# HiCExplorer 2.2.1 was used
+
+hicBuildMatrix -s [_1.bam] [_2.bam] \
+--restrictionSequence GATC \
+--inputBufferSize 100000
+-o N2_emb_sum_10kb.h5
+--QCfolder ./hicQC
+
+hicCorrectMatrix diagnostic_plot --matrix N2_emb_sum_10kb.h5 \
+-o [diagnostic_plot.png]
+
+hicCorrectMatrix correct –correctionMethod ICE \
+–matrix N2_emb_sum_10kb.h5 \
+–filterThreshold <loIr threshold> <upper threshold> \
+-o N2_emb_sum_10kb_correct.h5
