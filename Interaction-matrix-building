@@ -1,0 +1,10 @@
+bowtie2 —-local —p 8 -x [index file] -U [input.fastq] > [output.sam]
+#number of output should be 2 x replicates
+#for following recognition by hicPlotTADs:
+sed -i 's/CHROMOSOME_I/chrI/g' [.sam]
+sed -i 's/CHROMOSOME_V/chrV/g' [.sam]
+sed -i 's/CHROMOSOME_X/chrX/g' [.sam]
+samtools view -b -o [output.bam] [input.sam]
+samtools merge [out.bam] [in1.bam] [in2.bam] [in3.bam]
+#merged the same end fragments into one. output number should be 2.
+samtools sort -T ./tmp/aln.sorted.bam -o [.sorted.bam] [input.bam]
